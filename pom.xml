@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cn.stronger.we</groupId>
+        <artifactId>microservice-service-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>bamboo-leaf</artifactId>
+    <name>bamboo-leaf</name>
+    <version>1.0.0-SNAPSHOT</version>
+    <groupId>cn.stronger.we.leaf</groupId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>bamboo-leaf-client</module>
+        <module>bamboo-leaf-core</module>
+    </modules>
+</project>

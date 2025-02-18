@@ -1,0 +1,33 @@
+server:
+  port: 1001
+
+mysql:
+  leaf:
+    host: localhost
+    port: 3306
+    db: leaf
+    username: root
+    password: root
+redis:
+  leaf:
+    database: 1
+    host: 127.0.0.1
+    port: 6379
+    password: redis
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${mysql.leaf.username}
+    url: jdbc:mysql://${mysql.leaf.host}:${mysql.leaf.port}/${mysql.leaf.db}?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2B8
+    type: com.zaxxer.hikari.HikariDataSource
+    password: ${mysql.leaf.password}
+  redis:
+    database: ${redis.leaf.database}
+    host: ${redis.leaf.host}
+    port: ${redis.leaf.port}
+    password: ${redis.leaf.password}
+  application:
+    name: bamboo-leaf

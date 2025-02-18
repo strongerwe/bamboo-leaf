@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stronger.we.leaf.mapper.BizLeafRelationMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stronger.we.leaf.mapper.entity.BizLeafRelation">
+        <id column="id" property="id"/>
+        <result column="biz_code" property="bizCode"/>
+        <result column="rule_code" property="ruleCode"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id
+        ,biz_code,rule_code
+    </sql>
+
+    <select id="list" resultType="cn.stronger.we.leaf.rest.vo.BizLeafRelationTableVO">
+        SELECT r.biz_code bizCode,
+        a.rule_name ruleName,
+        a.rule_code ruleCode,
+        a.reset_rule resetRule,
+        a.serial_length serialLength,
+        a.start_number startNumber,
+        a.incr_rule incrRule,
+        a.format formatStyle,
+        a.create_time createTime
+        FROM biz_leaf_relation r
+        LEFT JOIN bamboo_leaf_config a ON a.rule_code = r.rule_code
+        WHERE a.is_deleted = FALSE
+        <if test="query.bizCode != null and query.bizCode != ''">
+            and r.biz_code = #{query.bizCode}
+        </if>
+        <if test="query.ruleCode != null and query.ruleCode != ''">
+            and a.rule_code = #{query.ruleCode}
+        </if>
+        order by r.biz_code
+    </select>
+
+    <select id="selectByBizCode" resultType="cn.stronger.we.leaf.mapper.entity.BizLeafRelation">
+        select
+        <include refid="Base_Column_List"/>
+        from biz_leaf_relation
+        where biz_code = #{bizCode}
+    </select>
+
+    <select id="selectByRuleCode" resultType="cn.stronger.we.leaf.mapper.entity.BizLeafRelation">
+        select
+        <include refid="Base_Column_List"/>
+        from biz_leaf_relation
+        where rule_code = #{ruleCode}
+    </select>
+    <select id="selectConfigByBizCode" resultType="cn.stronger.we.leaf.framework.dto.BambooLeafConfigDTO">
+        SELECT r.biz_code      bizCode,
+               a.rule_name     ruleName,
+               a.rule_code     ruleCode,
+               a.reset_rule    resetRule,
+               a.serial_length serialLength,
+               a.start_number  startNumber,
+               a.incr_rule     incrRule,
+               a.format        format
+        FROM biz_leaf_relation r
+                 INNER JOIN bamboo_leaf_config a ON a.rule_code = r.rule_code
+        WHERE a.is_deleted = FALSE
+          and r.biz_code = #{bizCode}
+    </select>
+
+    <select id="listAll" resultType="java.lang.String">
+        select biz_code from biz_leaf_relation
+    </select>
+
+    <insert id="insert">
+        insert into biz_leaf_relation(`biz_code`, `rule_code`)
+        VALUES (#{relation.bizCode}, #{relation.ruleCode})
+    </insert>
+
+    <update id="updateById">
+        update biz_leaf_relation
+        set rule_code = #{relation.ruleCode}
+        where id = #{relation.id}
+    </update>
+
+    <delete id="deleteById">
+        delete
+        from biz_leaf_relation
+        where id = #{relation.id}
+    </delete>
+</mapper>

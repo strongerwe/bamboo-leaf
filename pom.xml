@@ -17,4 +17,34 @@
         <module>bamboo-leaf-client</module>
         <module>bamboo-leaf-core</module>
     </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>cn.stronger.we.leaf</groupId>
+                <artifactId>bamboo-leaf-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.stronger.we</groupId>
+                <artifactId>microservice-openfeign</artifactId>
+                <version>${parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.stronger.we</groupId>
+                <artifactId>microservice-mybatis</artifactId>
+                <version>${parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.stronger.we</groupId>
+                <artifactId>microservice-redis</artifactId>
+                <version>${parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.stronger.we</groupId>
+                <artifactId>microservice-logs</artifactId>
+                <version>${parent.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

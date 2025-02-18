@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stronger.we.leaf.mapper.LeafAllocMapper">
+    <update id="updateMaxId">
+        UPDATE leaf_alloc
+        SET max_id = max_id + step
+        WHERE biz_tag = #{tag}
+    </update>
+
+    <update id="updateMaxIdByCustomStep">
+        UPDATE leaf_alloc
+        SET max_id = max_id + #{leafAlloc.step}
+        WHERE biz_tag = #{leafAlloc.key}
+    </update>
+
+    <update id="updateUsed">
+        UPDATE leaf_alloc
+        SET is_used = 1
+        WHERE date_str = #{dateStr}
+    </update>
+
+    <insert id="insert">
+        INSERT INTO leaf_alloc(biz_tag, max_id, step, incr, date_str, description, update_time)
+        VALUES (#{leafAlloc.key}, #{leafAlloc.maxId}, #{leafAlloc.step}, #{leafAlloc.incr}, #{leafAlloc.dateStr},
+                #{leafAlloc.description},
+                #{leafAlloc.updateTime});
+    </insert>
+
+    <select id="getAllLeafAllocs" resultType="cn.stronger.we.leaf.mapper.entity.LeafAlloc">
+        SELECT biz_tag as 'key' , max_id as maxId, step, incr, update_time, is_used
+        FROM leaf_alloc
+        where is_used = 0
+    </select>
+    <select id="getLeafAlloc" resultType="cn.stronger.we.leaf.mapper.entity.LeafAlloc">
+        SELECT biz_tag, max_id, step, incr, is_used
+        FROM leaf_alloc
+        WHERE biz_tag = #{tag}
+          and is_used = 0
+    </select>
+
+    <select id="getAllTags" resultType="java.lang.String">
+        SELECT biz_tag
+        FROM leaf_alloc
+    </select>
+</mapper>

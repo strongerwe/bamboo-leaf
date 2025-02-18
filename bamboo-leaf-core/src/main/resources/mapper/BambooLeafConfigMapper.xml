@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stronger.we.leaf.mapper.BambooLeafConfigMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stronger.we.leaf.mapper.entity.BambooLeafConfig">
+        <id column="id" property="id"/>
+        <result column="rule_name" property="ruleName"/>
+        <result column="rule_code" property="ruleCode"/>
+        <result column="reset_rule" property="resetRule"/>
+        <result column="serial_length" property="serialLength"/>
+        <result column="start_number" property="startNumber"/>
+        <result column="incr_rule" property="incrRule"/>
+        <result column="format" property="format"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="remark" property="remark"/>
+        <result column="is_deleted" property="isDeleted"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id
+        ,rule_code,rule_name,reset_rule,serial_length,start_number,incr_rule, format, remark, create_time, update_time, is_deleted
+    </sql>
+
+    <select id="list" resultType="cn.stronger.we.leaf.rest.vo.BambooLeafConfigTableVO">
+        select
+        id id,
+        rule_name ruleName,
+        rule_code ruleCode,
+        reset_rule resetRule,
+        serial_length serialLength,
+        start_number startNumber,
+        incr_rule incrRule,
+        format formatStyle,
+        create_time createTime
+        from bamboo_leaf_config
+        where is_deleted = false
+        <if test="query.ruleName != null and query.ruleName != ''">
+            and rule_name like CONCAT('%',#{query.ruleName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="query.resetRule != null">
+            and reset_rule = #{query.resetRule}
+        </if>
+        order by create_time desc
+    </select>
+
+    <select id="selectByRuleName" resultType="cn.stronger.we.leaf.mapper.entity.BambooLeafConfig">
+        select
+        <include refid="Base_Column_List"/>
+        from bamboo_leaf_config
+        where rule_name = #{ruleName}
+        and is_deleted = false
+    </select>
+
+    <select id="selectByRuleCode" resultType="cn.stronger.we.leaf.mapper.entity.BambooLeafConfig">
+        select
+        <include refid="Base_Column_List"/>
+        from bamboo_leaf_config
+        where rule_code = #{ruleCode}
+        and is_deleted = false
+    </select>
+
+    <select id="selectById" resultType="cn.stronger.we.leaf.mapper.entity.BambooLeafConfig">
+        select
+        <include refid="Base_Column_List"/>
+        from bamboo_leaf_config
+        where id = #{id}
+        and is_deleted = false
+    </select>
+
+    <delete id="deleteById">
+        UPDATE bamboo_leaf_config
+        SET is_deleted  = true,
+            update_time = #{now}
+        WHERE id = #{id}
+    </delete>
+
+    <update id="updateById">
+        UPDATE bamboo_leaf_config
+        SET rule_name     = #{config.ruleName},
+            reset_rule    = #{config.resetRule},
+            serial_length = #{config.serialLength},
+            start_number  = #{config.startNumber},
+            incr_rule     = #{config.incrRule},
+            remark        = #{config.remark},
+            format        = #{config.format},
+            update_time   = #{config.updateTime}
+        WHERE id = #{config.id}
+    </update>
+
+    <insert id="insert">
+        INSERT INTO bamboo_leaf_config(`rule_code`, `rule_name`, `reset_rule`, `serial_length`, `start_number`,
+                                       `incr_rule`, `format`, `remark`, `create_time`, `update_time`)
+        VALUES (#{config.ruleCode}, #{config.ruleName}, #{config.resetRule}, #{config.serialLength},
+                #{config.startNumber},
+                #{config.incrRule}, #{config.format}, #{config.remark}, #{config.createTime},
+                #{config.updateTime});
+    </insert>
+</mapper>

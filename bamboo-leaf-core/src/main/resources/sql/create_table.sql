@@ -1,4 +1,4 @@
-CREATE TABLE `biz_leaf_relation`
+CREATE TABLE `leaf_biz_relation`
 (
     `id`        bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
     `biz_code`  varchar(255) NOT NULL COMMENT '业务编码规则',
@@ -8,7 +8,7 @@ CREATE TABLE `biz_leaf_relation`
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 
-CREATE TABLE `bamboo_leaf_config`
+CREATE TABLE `leaf_config`
 (
     `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
     `rule_name`     varchar(300)  NOT NULL COMMENT '编码规则名称',

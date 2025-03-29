@@ -3,17 +3,17 @@ server:
 
 mysql:
   leaf:
-    host: localhost
+    host: 127.0.0.1
     port: 3306
-    db: leaf
+    db: platform
     username: root
-    password: root
+    password: Cola@@2024.
 redis:
   leaf:
     database: 1
     host: 127.0.0.1
     port: 6379
-    password: redis
+    password: Cola@2024
 
 spring:
   main:
@@ -31,3 +31,10 @@ spring:
     password: ${redis.leaf.password}
   application:
     name: bamboo-leaf
+
+
+custom:
+  method:
+    custom:
+      log:
+        enabled: true

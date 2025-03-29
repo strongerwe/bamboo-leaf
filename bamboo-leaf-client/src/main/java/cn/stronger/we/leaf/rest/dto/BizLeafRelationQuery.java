@@ -1,6 +1,7 @@
 package cn.stronger.we.leaf.rest.dto;
 
-import cn.stronger.we.commons.framework.request.AdminPageRequest;
+import cn.stronger.we.commons.framework.request.AbstractAdminPageRequest;
+import cn.stronger.we.leaf.rest.vo.BizLeafRelationTableVO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,7 +22,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class BizLeafRelationQuery extends AdminPageRequest {
+public class BizLeafRelationQuery extends AbstractAdminPageRequest<BizLeafRelationTableVO> {
 
     private String bizCode;
 

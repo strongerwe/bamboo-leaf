@@ -1,6 +1,8 @@
 package cn.stronger.we.leaf.rest.dto;
 
-import cn.stronger.we.commons.framework.request.AdminPageRequest;
+import cn.stronger.we.commons.framework.request.AbstractAdminPageRequest;
+import cn.stronger.we.commons.framework.response.AdminPageResponse;
+import cn.stronger.we.leaf.rest.vo.BambooLeafConfigTableVO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,7 +22,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class BambooLeafConfigQuery extends AdminPageRequest {
+public class BambooLeafConfigQuery extends AbstractAdminPageRequest<BambooLeafConfigTableVO> {
     /**
      * 业务编码
      */

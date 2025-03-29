@@ -22,7 +22,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName("biz_leaf_relation")
+@TableName("leaf_biz_relation")
 @AllArgsConstructor
 @NoArgsConstructor
 public class BizLeafRelation implements Serializable {

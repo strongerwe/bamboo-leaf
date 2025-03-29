@@ -24,7 +24,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName("bamboo_leaf_config")
+@TableName("leaf_config")
 @AllArgsConstructor
 @NoArgsConstructor
 public class BambooLeafConfig implements Serializable {

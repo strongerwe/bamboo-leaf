@@ -25,8 +25,8 @@
         a.incr_rule incrRule,
         a.format formatStyle,
         a.create_time createTime
-        FROM biz_leaf_relation r
-        LEFT JOIN bamboo_leaf_config a ON a.rule_code = r.rule_code
+        FROM leaf_biz_relation r
+        LEFT JOIN leaf_config a ON a.rule_code = r.rule_code
         WHERE a.is_deleted = FALSE
         <if test="query.bizCode != null and query.bizCode != ''">
             and r.biz_code = #{query.bizCode}
@@ -40,14 +40,14 @@
     <select id="selectByBizCode" resultType="cn.stronger.we.leaf.mapper.entity.BizLeafRelation">
         select
         <include refid="Base_Column_List"/>
-        from biz_leaf_relation
+        from leaf_biz_relation
         where biz_code = #{bizCode}
     </select>
 
     <select id="selectByRuleCode" resultType="cn.stronger.we.leaf.mapper.entity.BizLeafRelation">
         select
         <include refid="Base_Column_List"/>
-        from biz_leaf_relation
+        from leaf_biz_relation
         where rule_code = #{ruleCode}
     </select>
     <select id="selectConfigByBizCode" resultType="cn.stronger.we.leaf.framework.dto.BambooLeafConfigDTO">
@@ -59,30 +59,30 @@
                a.start_number  startNumber,
                a.incr_rule     incrRule,
                a.format        format
-        FROM biz_leaf_relation r
-                 INNER JOIN bamboo_leaf_config a ON a.rule_code = r.rule_code
+        FROM leaf_biz_relation r
+                 INNER JOIN leaf_config a ON a.rule_code = r.rule_code
         WHERE a.is_deleted = FALSE
           and r.biz_code = #{bizCode}
     </select>
 
     <select id="listAll" resultType="java.lang.String">
-        select biz_code from biz_leaf_relation
+        select biz_code from leaf_biz_relation
     </select>
 
     <insert id="insert">
-        insert into biz_leaf_relation(`biz_code`, `rule_code`)
+        insert into leaf_biz_relation(`biz_code`, `rule_code`)
         VALUES (#{relation.bizCode}, #{relation.ruleCode})
     </insert>
 
     <update id="updateById">
-        update biz_leaf_relation
+        update leaf_biz_relation
         set rule_code = #{relation.ruleCode}
         where id = #{relation.id}
     </update>
 
     <delete id="deleteById">
         delete
-        from biz_leaf_relation
+        from leaf_biz_relation
         where id = #{relation.id}
     </delete>
 </mapper>
